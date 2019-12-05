@@ -1,4 +1,4 @@
-package algorithms.slidingwindow.datastructures.linkedlist;
+package datastructures.linkedlist;
 
 /*
 Example for Linked List data structure
