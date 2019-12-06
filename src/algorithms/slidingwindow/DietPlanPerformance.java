@@ -49,22 +49,27 @@ public class DietPlanPerformance {
 
     public static void main(String... args) {
 
-        int[] calories = {1, 2, 3, 4, 5,8,9,0,4,5,6,7};
+        int[] calories = {1, 2, 3, 4};
 
-        int k = 4;
+        int k = 2;
 
         int lower = 3;
 
-        int upper = 3;
+        int upper = 4;
 
 
+        /*Print Total points using Brute Force approach*/
         System.out.println(calculateTotalPoints(calories, k, lower, upper));
+
+
+        /*Print Total points using Sliding Window algorithm approach*/
+        System.out.println(totalDieterPoints(calories, k, lower, upper));
 
 
     }
 
+    /*Brute Force Approach algorithms with Big 0 complexities like O(n2) */
     public static int calculateTotalPoints(int[] calories, int k, int lower, int upper) {
-
 
         int i;
         int j;
@@ -75,6 +80,8 @@ public class DietPlanPerformance {
 
         int len = calories.length;
 
+        /*handle ArrayIndexOutOfBoundsException and Check less than 0 value for k */
+        if (k <= 0 || k > len) throw new IllegalArgumentException("Invalid value of k");
 
         for (i = 0; i < len; i++) {
 
@@ -83,11 +90,10 @@ public class DietPlanPerformance {
 
                 t = t + calories[j];
 
-                //System.out.println(t);
-
 
             }
 
+            //System.out.println(t);
 
             if (t < lower) {
                 output = output - 1;
@@ -106,6 +112,67 @@ public class DietPlanPerformance {
 
         return output;
 
+    }
+
+
+    /*Best Approach - Sliding Window Algorithm */
+    /*Algorithm to calculate total number of points with O(n) complexity*/
+
+
+    /* Steps to be performed
+    // Step 1: Check for all edge cases like k value is 0, or greater than array size then return 0
+    // Step 2: Calculate the sum of the first window in the first loop
+    // Step 3: Now calculate the data for rest of the windows
+    // Step 4: To calculate the window sum, first remove the first element that was added to the sum from the totalSum and
+    //         add the current element to the total Sum. Let the loop run until the end of the array
+    */
+    public static int totalDieterPoints(int[] calories, int k, int lower, int upper) {
+
+        int totalPoints = 0;
+        int sumCalories = 0;
+        int len = calories.length;
+
+        /*handle ArrayIndexOutOfBoundsException and Check less than 0 value for k */
+        if (k <= 0 || k > len) throw new IllegalArgumentException("Invalid value of k");
+
+        for (int i = 0; i < k; i++) {
+
+            sumCalories = sumCalories + calories[i];
+
+        }
+
+        if (sumCalories < lower) {
+            totalPoints = totalPoints - 1;
+
+        }
+
+        if (sumCalories > upper) {
+
+            totalPoints = totalPoints + 1;
+
+        }
+
+        for (int i = k; i < len; i++) {
+
+            sumCalories = sumCalories + calories[i] - calories[i - k];
+
+            //System.out.println(sumCalories);
+
+            if (sumCalories < lower) {
+                totalPoints = totalPoints - 1;
+
+            }
+
+            if (sumCalories > upper) {
+
+                totalPoints = totalPoints + 1;
+
+            }
+
+        }
+
+
+        return totalPoints;
     }
 
 
