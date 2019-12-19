@@ -1,7 +1,7 @@
 /*
  * Author: Amit Sachu
  * Date: December 16, 2019
- * Description: ax Consecutive Ones III
+ * Description: Max Consecutive Ones III
  * LeetCode problem no: 1004
  * URL: https://leetcode.com/problems/max-consecutive-ones-iii/
  */
@@ -9,7 +9,7 @@
 
 package algorithms.slidingwindow;
 
-/*
+/* ---------------- Problem Desc
 
 Given an array A of 0s and 1s, we may change up to K values from 0 to 1.
 Return the length of the longest (contiguous) subarray that contains only 1s.
@@ -39,8 +39,14 @@ A[i] is 0 or 1
 
 * */
 
+/* ##################### ALGORITHM ##################################
+* Fast/Slow Algorithm (similar to Minimum Window Substring algorithm)
+* It's also known as Bit Flip algorithm
+*
+* ##################### ALGORITHM ###################################*/
 
-public class LongestOnes {
+
+public class MaximumConsecutiveOnes {
 
 
     public static void main(String[] args) {
